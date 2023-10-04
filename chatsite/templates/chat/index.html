@@ -1,0 +1,68 @@
+{% load static %}
+  <!DOCTYPE html>
+  <html>
+    <head>
+            
+        <!--Import tailwindcss.css-->
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+
+        <!--Import  tailwindcss.js-->
+        <script src="https://cdn.tailwindcss.com"></script>
+       
+        <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
+        
+    </head>
+
+    <body>
+    {% block body %}
+        <div class="h-20 bg-gradient-to-r from-sky-500 to-indigo-500">
+            <div class="text-slate-100 text-center hover:text-blue-600">  
+            <h2 class="not-italic leading-10 font-semibold">Chat</h2>
+            <p class="italic">Wellcome!</p>
+            </div>
+        </div>
+        <div class="md:container md:mx-auto">
+            <div class="row">
+            <div class="input-field  text-center p-4">
+                <div class="section center-block">
+                <div>
+                    {% block form %}
+                    <h3 class="p-6">
+                    Login
+                    </h3>
+                    <form id="login-form" class="form-group" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="input-field bg-blue-500 h-20  p-4">
+                                <div class="input-field bg-blue-500 p-4">
+                                <input name="username" id="id_username" type="text">
+                                <label for="id_username">Username</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input name="password" id="id_password" type="password">
+                                <label for="id_password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s8">
+                                <a href="{% url 'register' %}">Register</a>
+                            </div>
+                            <div class="col s4">
+                            <div class="right">
+                                <button class="btn blue waves-effect waves-light pull-s12">Login</button>
+                            </div>
+                            </div>
+                        </div>
+                    </form>
+                    {% endblock %}
+                </div>
+            </div>
+            </div>
+            </div>
+        </div>
+        {% endblock %}
+    </body>
+
+  </html>
