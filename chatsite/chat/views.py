@@ -24,7 +24,7 @@ def index(request):
             login(request, user)
         else:
             return HttpResponse('{"error": "User does not exist"}')
-        return redirect('room-index')
+        return redirect('room-list')
 
 
 def register_view(request):

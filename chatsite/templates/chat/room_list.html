@@ -21,6 +21,13 @@
                     <div class="mb-2">
                         <label for="roomInput">Enter a room name to connect to it:</label>
                         <input type="text" class="form-control" id="roomInput" placeholder="Room name">
+                        <div class="nav-wrapper container">
+                            <a href="#" class="brand-logo">Chat</a>
+                            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                                <li><a href="">{{ request.user.username }}</a></li>
+                                <li><a href="{% url 'logout' %}"><i class="material-icons">power_settings_new</i></a></li>
+                            </ul>
+                          </div>
                         <small id="roomInputHelp" class="form-text text-muted">If the room doesn't exist yet, it will be created for you.</small>
                     </div>
                     <button type="button" id="roomConnect" class="btn btn-success">Connect</button>
@@ -35,6 +42,6 @@
                 </div>
             </div>
         </div>
-        <script src="{% static 'index_room.js' %}"></script>
+        <script src="{% static 'js/index_room.js' %}"></script>
     </body>
 </html>
