@@ -11,7 +11,7 @@
 </nav>
     <div class="section" style="height: 80vh">
     <div class="row">
-        <div class="m8">
+        <div class="col s3">
         <div class="card">
             <div class="collection">
                 {% for user in users %}
@@ -52,16 +52,16 @@
     {% load static %}
     <script src="{% static 'js/chat.js' %}"></script>
     <script>
-        // For receiving
+       // For receiving
         sender_id = "{{ receiver.id }}";
         receiver_id = "{{ request.user.id }}";
 
         //For sending
-        $(function () {
+        document.querySelector(function () {
             scrolltoend();
-            $('#chat-box').on('submit', function (event) {
+            document.querySelector('#chat-box').on('submit', function (event) {
                 event.preventDefault();
-                var message = $('#id_message');
+                var message = document.querySelector('#id_message');
                 send('{{ request.user.username }}', '{{ receiver.username }}', message.val());
                 message.val('');
             })

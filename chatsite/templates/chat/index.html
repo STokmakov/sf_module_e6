@@ -9,7 +9,7 @@
         <!--Import  tailwindcss.js-->
         <script src="https://cdn.tailwindcss.com"></script>
        
-        <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/room.js' %}"></script>
         
     </head>
 
@@ -49,12 +49,14 @@
                         </div>
                         <div class="row">
                             <div class="bg-blue-500  p-2">
-                                <a href="{% url 'register' %}">Register</a>
+                            
+                                <a  class="bg-blue-00" href="{% url 'register' %}" >Register</a>
                             </div>
+                            <div>
                             <div class="bg-blue-500 p-2">
                             
                                 <button class="shadow-lg shadow-cyan-500/50 bg-cyan-500 hover:bg-cyan-600 p-2">Login</button>
-                            
+                            </div>
                             </div>
                         </div>
                     </form>
