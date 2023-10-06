@@ -1,7 +1,7 @@
 import os
-
+from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-aed)8z9%%!xlanu%mw4c-vlxbqbk&t!5ixfp=m&mezgs5y^q)!'
@@ -21,10 +21,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+   # 'daphne',
     'channels',
+    'channels_redis',
     'rest_framework',
     
-    'chat'
+
+    'chat',
 ]
 
 MIDDLEWARE = [
@@ -55,8 +58,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'ChatApp.wsgi.application'
 ASGI_APPLICATION = 'ChatApp.asgi.application'
+WSGI_APPLICATION = 'ChatApp.wsgi.application'
+
 
 # Database
 DATABASES = {
@@ -99,7 +103,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
@@ -111,3 +115,5 @@ CHANNEL_LAYERS = {
         },
     }
 }
+REST_FRAMEWORK = {}
+DJANGO_CHANNELS_REST_API = {}
