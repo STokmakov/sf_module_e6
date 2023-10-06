@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
-                    <label for="onlineUsers">Online users</label>
+                    <label for="onlineUsers">Online users:</label>
                     <select multiple class="form-control" id="onlineUsersSelector">
                     </select>
                 </div>
@@ -111,6 +111,7 @@ function connect() {
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         console.log(data);
+        console.log('test');
 
         switch (data.type) {
             case "chat_message":
