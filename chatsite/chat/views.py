@@ -4,11 +4,15 @@ from django.http.response import JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
+from rest_framework import generics
+from rest_framework import permissions
 from rest_framework.parsers import JSONParser
-from chat.models import Message
+
+from chat.models import Message, Profile
 from chat.forms import SignUpForm
-#from chat.serializers import MessageSerializer, UserSerializer
-from django.shortcuts import render
+
+from .serializers import ProfileSer, ProfileUpdateSer, RoomSer
+
 
 from chat.models import Room
 
@@ -53,15 +57,60 @@ def register_view(request):
     context = {'form':form}
     return render(request, template, context)
 
+def profile(request):
+    return render(request, 'chat/profile.html', {
+        'profile': Profile.objects.all(),
+    })
+
+def profile_edit(request):
+    return render(request, 'chat/profile_edit.html', {
+        'profile': Profile.objects.all(),
+    })
 
 def room(request):
     return render(request, 'chat/room_list.html', {
         'rooms': Room.objects.all(),
     })
 
-
 def room_view(request, room_name):
     chat_room, created = Room.objects.get_or_create(name=room_name)
     return render(request, 'chat/room.html', {
         'room': chat_room,
     })
+
+def room_edit(request):
+    return render(request, 'chat/room_edit.html', {
+        'room': Room.objects.all(),
+    })
+
+
+class ProfileDetail(generics.RetrieveAPIView):
+    """Профиль пользователя"""
+    permission_classes = [permissions.AllowAny]
+    #permission_classes = [permissions.IsAuthenticated]
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSer
+
+
+class ProfileUpdateView(generics.UpdateAPIView):
+    """Редактирование профилья пользователя"""
+    permission_classes = [permissions.AllowAny]  
+    #permission_classes = [permissions.IsAuthenticated]
+    queryset = Profile.objects.all()
+    serializer_class = ProfileUpdateSer
+
+class RoomDetail(generics.RetrieveAPIView):
+    """Комната"""
+    permission_classes = [permissions.AllowAny]
+    #permission_classes = [permissions.IsAuthenticated]
+    queryset = Room.objects.all()
+    serializer_class = RoomSer
+
+class RoomUpdateView(generics.UpdateAPIView):
+    """Редактирование комнаты"""
+    permission_classes = [permissions.AllowAny]
+    #permission_classes = [permissions.IsAuthenticated]
+    queryset = Room.objects.all()
+    serializer_class = RoomSer
+
+

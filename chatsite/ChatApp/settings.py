@@ -1,8 +1,9 @@
 import os
 from pathlib import Path
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+# BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-aed)8z9%%!xlanu%mw4c-vlxbqbk&t!5ixfp=m&mezgs5y^q)!'
 
@@ -25,8 +26,8 @@ INSTALLED_APPS = [
     'channels',
     'channels_redis',
     'rest_framework',
+    'corsheaders',
     
-
     'chat',
 ]
 
@@ -38,6 +39,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'ChatApp.urls'
@@ -103,7 +107,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 
 DEFAULT_AUTO_FIELD='django.db.models.AutoField' 
 
@@ -115,5 +122,13 @@ CHANNEL_LAYERS = {
         },
     }
 }
-REST_FRAMEWORK = {}
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+    # 'rest_framework.authentication.SessionAuthentication',
+    'rest_framework.authentication.BasicAuthentication',
+]
+}
 DJANGO_CHANNELS_REST_API = {}

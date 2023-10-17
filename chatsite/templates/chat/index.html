@@ -1,21 +1,19 @@
+
 {% load static %}
   <!DOCTYPE html>
   <html>
     <head>
             
-        <!--Import tailwindcss.css-->
-        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-
-        <!--Import  tailwindcss.js-->
-        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
        
-        <script type="text/javascript" src="{% static 'js/room.js' %}"></script>
+       
         
     </head>
 
     <body>
     {% block body %}
-        <div class="h-20 bg-gradient-to-r from-sky-500 to-indigo-500">
+        <div class="row">
             <div class="text-slate-100 text-center hover:text-blue-600">  
             <h2 class="not-italic leading-10 font-semibold">Chat</h2>
             <p class="italic">Wellcome!</p>
@@ -28,34 +26,37 @@
                 <div>
                     {% block form %}
                     <div class="flex flex-col">
-                    <h3 class="p-4">
+                    <h3 class="left">
                     Login
                     </h3>
                     </div>
+                    <p></p>
                     <form id="login-form" class="form-group" method="post">
                         {% csrf_token %}
                         <div class="row">
-                            <div class="input-field bg-blue-500 h-20  p-4">
-                                <div class="input-field bg-blue-500 p-4">
-                                <input name="username" id="id_username" type="text">
+                            <div class="input-field col s12">
+                                <input class="form-control" name="username" id="id_username" type="text">
                                 <label for="id_username">Username</label>
                             </div>
                         </div>
+                        <p></p>
                         <div class="row">
-                            <div class="input-field bg-blue-500 p-4">
-                                <input name="password" id="id_password" type="password">
+                            <div class="input-field col s12">
+                                <input class="form-control" name="password" id="id_password" type="password">
                                 <label for="id_password">Password</label>
                             </div>
                         </div>
+                        <p></p>
                         <div class="row">
-                            <div class="bg-blue-500  p-2">
+                            <div class="right">
                             
-                                <a  class="bg-blue-00" href="{% url 'register' %}" >Register</a>
+                                <a  class="bi bi-badge-hd-fill" href="{% url 'register' %}" >Register</a>
                             </div>
-                            <div>
-                            <div class="bg-blue-500 p-2">
+                            <p></p>
+                            <div class="col s12">
+                                <div class="right">
                             
-                                <button class="shadow-lg shadow-cyan-500/50 bg-cyan-500 hover:bg-cyan-600 p-2">Login</button>
+                                <button class="btn btn-success">Login</button>
                             </div>
                             </div>
                         </div>

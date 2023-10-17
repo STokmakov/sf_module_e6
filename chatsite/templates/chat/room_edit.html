@@ -1,0 +1,93 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room</title>
+</head>
+<body>
+
+    <h1> Комнаты </h1>
+
+    
+
+    <ul>
+        
+            <div class="container">
+               <h1> Room: </h1>
+              {% for room_edit in room %}
+                <form id="formroom{{room_edit.id}}">
+                  {% csrf_token %}
+                  <ul>
+
+                      <div class="edit__content">
+                          <div class="container">
+                            <div class="row">
+                              <form>  
+                               
+                                <h4>Room: {{room_edit.name}} id={{room_edit.id}}</h4>
+                                <input type="text" name="name"> name 
+                                <button type="submit"> SEND</button>
+                                
+                              </form> 
+                              <hr>
+                                        
+                  </ul>    
+
+              {% endfor %} 
+                  <div class="edit__buttons">
+                    <a href="{% url 'room-list' %}"><button class="button__back">Back</button></a>
+                  </div> 
+              <script>    
+                      {% for room_edit in room %}          
+                      const url{{ room_edit.id }} = 'http://localhost:8001/room/{{ room_edit.id}}/';             
+                      fetch(url{{ room_edit.id }})
+                      .then(response => {
+                        return response.json();
+                      })
+                      .then(data => {
+                            console.log(data);
+                      })   
+
+                      const sendData{{ room_edit.id }} = async (url, data) => {
+                        console.log(data)
+                        const response{{ room_edit.id }} = await fetch (url, {
+                        method: 'PUT',
+                        body: data,
+                        
+                        });
+
+                        if (!response{{ room_edit.id }}.ok) {
+                        throw new Error(`Ошибка по адресу ${url}, статус ошибки ${response{{ room_edit.id }}.status}`);
+                        }
+                        console.log(3);
+                        return await response{{ room_edit.id }}.json();
+                      };
+                        
+
+
+                      const sendRoom{{ room_edit.id }} = () => {
+                      const roomForm{{ room_edit.id }} = document.getElementById('formroom{{room_edit.id}}');
+                        roomForm{{ room_edit.id }}.addEventListener('submit', e => {
+                        e.preventDefault();
+                              
+                        const formData{{ room_edit.id }} = new FormData(roomForm{{ room_edit.id }}); 
+                                                
+                        sendData{{ room_edit.id }}('http://localhost:8001/room/update/{{ room_edit.id}}/', formData{{ room_edit.id }})
+                        .then(() => {
+                          roomForm{{ room_edit.id }}.reset();
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                              
+                      });
+                      };
+                      sendRoom{{ room_edit.id }}();
+                      {% endfor %} 
+              </script>  
+               
+</body>
+</html>

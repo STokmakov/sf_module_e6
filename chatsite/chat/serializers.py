@@ -10,6 +10,11 @@ class UserSer(serializers.ModelSerializer):
         model = User
         fields = ("username", "email")
 
+class RoomSer(serializers.ModelSerializer):
+    """Сериализация комнаты"""
+    class Meta:
+        model = Room
+        fields = ("name",)
 
 class ProfileSer(serializers.ModelSerializer):
     """Профиль пользователя"""
@@ -25,10 +30,3 @@ class ProfileUpdateSer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ("avatar", "email_two", "phone", "first_name", "last_name")
-
-
-class AvatarUpdateSer(serializers.ModelSerializer):
-    """Редактирование аватар ользователя"""
-    class Meta:
-        model = Profile
-        fields = ("avatar",)
